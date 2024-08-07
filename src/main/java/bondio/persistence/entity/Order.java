@@ -1,4 +1,4 @@
-package bondio.web.persistence.entity;
+package bondio.persistence.entity;
 
 import lombok.Data;
 
