@@ -7,10 +7,7 @@ import bondio.persistence.entity.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -65,5 +62,12 @@ public class DesignBondioController {
                 .stream()
                 .filter(x -> x.getType().equals(type))
                 .collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public String processBondio(Bondio bondio, @ModelAttribute Order order) {
+        log.info("Processing bondio: " + bondio);
+        order.addBondio(bondio);
+        return "redirect:/orders/current";
     }
 }
