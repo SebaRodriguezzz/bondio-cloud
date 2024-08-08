@@ -44,7 +44,7 @@ public class DesignBondioController {
         }
     }
 
-    @ModelAttribute(name = "Order")
+    @ModelAttribute(name = "order")
     public Order order () {
         return new Order();
     }
