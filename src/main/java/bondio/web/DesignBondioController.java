@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Controller
 @RequestMapping("/design")
-@SessionAttributes("bondioOrder")
+@SessionAttributes("order")
 public class DesignBondioController {
 
     @ModelAttribute
