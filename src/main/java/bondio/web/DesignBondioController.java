@@ -4,9 +4,11 @@ import bondio.enums.IngredientType;
 import bondio.persistence.entity.Bondio;
 import bondio.persistence.entity.Ingredient;
 import bondio.persistence.entity.Order;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -65,8 +67,13 @@ public class DesignBondioController {
     }
 
     @PostMapping
-    public String processBondio(Bondio bondio, @ModelAttribute Order order) {
-        log.info("Processing bondio: " + bondio);
+    public String processBondio(@Valid Bondio bondio,
+                                Errors errors,
+                                @ModelAttribute Order order) {
+        if (errors.hasErrors()) {
+            return "design";
+        }
+        log.info("Processing bondio: {}", bondio);
         order.addBondio(bondio);
         return "redirect:/orders/current";
     }
