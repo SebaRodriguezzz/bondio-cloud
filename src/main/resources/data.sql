@@ -1,6 +1,6 @@
-delete from Ingredient_Ref;
-delete from Taco;
-delete from Taco_Order;
+delete from Bondio_Ingredient;
+delete from Bondio;
+delete from Bondio_Order;
 delete from Ingredient;
 insert into Ingredient (id, name, type) values ('CBTA', 'Ciabatta', 'BREAD');
 insert into Ingredient (id, name, type) values ('WHTB', 'White Bread', 'BREAD');

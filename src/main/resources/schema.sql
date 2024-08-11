@@ -1,4 +1,4 @@
-create table if not exists Taco_Order (
+create table if not exists Bondio_Order (
     id identity,
     delivery_Name varchar(50) not null,
     delivery_Street varchar(50) not null,
@@ -11,7 +11,7 @@ create table if not exists Taco_Order (
     placed_at timestamp not null
     );
 
-create table if not exists Taco (
+create table if not exists Bondio (
     id identity,
     name varchar(50) not null,
     taco_order bigint not null,
@@ -19,7 +19,7 @@ create table if not exists Taco (
     created_at timestamp not null
     );
 
-create table if not exists Ingredient_Ref (
+create table if not exists Bondio_Ingredient (
     ingredient varchar(4) not null,
     taco bigint not null,
     taco_key bigint not null
@@ -31,8 +31,8 @@ create table if not exists Ingredient (
     type varchar(10) not null
     );
 
-alter table Taco
-    add foreign key (taco_order) references Taco_Order(id);
+alter table Bondio
+    add foreign key (bondio_order) references Bondio_Order(id);
 
-alter table Ingredient_Ref
+alter table Bondio_Ingredient
     add foreign key (ingredient) references Ingredient(id);
