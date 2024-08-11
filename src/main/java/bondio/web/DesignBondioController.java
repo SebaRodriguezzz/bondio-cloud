@@ -4,14 +4,15 @@ import bondio.enums.IngredientType;
 import bondio.persistence.entity.Bondio;
 import bondio.persistence.entity.Ingredient;
 import bondio.persistence.entity.Order;
+import bondio.persistence.repository.IngredientRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,25 +22,20 @@ import java.util.stream.Collectors;
 @SessionAttributes("order")
 public class DesignBondioController {
 
+    private final IngredientRepository ingredientRepo;
+
+    @Autowired
+    public DesignBondioController(IngredientRepository ingredientRepo) {
+        this.ingredientRepo = ingredientRepo;
+    }
+
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
-        List<Ingredient> ingredients = Arrays.asList(
-                new Ingredient("CBTA", "Ciabatta", IngredientType.BREAD),
-                new Ingredient("WHTB", "White Bread", IngredientType.BREAD),
-                new Ingredient("SALT", "Salt", IngredientType.SEASONING),
-                new Ingredient("PEPP", "Pepper", IngredientType.SEASONING),
-                new Ingredient("TOMA", "Tomato", IngredientType.VEGGIES),
-                new Ingredient("ONIO", "Onion", IngredientType.VEGGIES),
-                new Ingredient("CHED", "Cheddar", IngredientType.CHEESE),
-                new Ingredient("PROV", "Provolone", IngredientType.CHEESE),
-                new Ingredient("YLLW", "Yellow Mustard", IngredientType.SAUCE),
-                new Ingredient("MAYO", "Mayonnaise", IngredientType.SAUCE)
-        );
-
+        Iterable<Ingredient> ingredients = ingredientRepo.findAll();
         IngredientType[] types = IngredientType.values();
         for (IngredientType type : types) {
             model.addAttribute(type.toString().toLowerCase(),
-                    filterByType(ingredients, type));
+                    filterByType((List<Ingredient>) ingredients, type));
         }
     }
 
