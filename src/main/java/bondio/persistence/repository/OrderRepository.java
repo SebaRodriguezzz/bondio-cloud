@@ -3,4 +3,9 @@ package bondio.persistence.repository;
 import bondio.persistence.entity.Order;
 import org.springframework.data.repository.CrudRepository;
 
-public interface OrderRepository extends CrudRepository<Order, Long> {}
+import java.util.List;
+
+public interface OrderRepository extends CrudRepository<Order, Long> {
+
+    List<Order> findByDeliveryZip(String deliveryZip);
+}
