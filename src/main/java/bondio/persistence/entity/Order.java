@@ -21,7 +21,8 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
-
+    @ManyToOne
+    private User user;
     private Date placedAt = new Date();
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
