@@ -58,6 +58,9 @@ public class SecurityConfig {
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
+                )
+                .oauth2Login(oauth2Login -> oauth2Login
+                        .loginPage("/login")
                 );
         return http.build();
     }
